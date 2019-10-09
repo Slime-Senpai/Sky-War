@@ -27,6 +27,6 @@ On peut également penser à inclure:
 
 -Un éventuel module pour gérer des boss de niveaux.
 
--Un éventuel module pour rajouter des éléments destructible aux niveaux.
+-Un éventuel module pour rajouter des éléments destructibles aux niveaux.
 
 -Un éventuel module pour gérer des "drones" que le joueur pourrait avoir avec des powerups.
