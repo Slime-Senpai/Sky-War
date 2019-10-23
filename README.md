@@ -31,6 +31,15 @@ On peut également penser à inclure:
 
 -Un éventuel module pour gérer des "drones" que le joueur pourrait avoir avec des powerups.
 
-Deadline:
+Deadlines:
 
-06/11 : Prototype de jeu fonctionnel
+
+27/10 : Prototype des modules Jeu Principal et Gestion des Ecrans : Timmy
+
+31/10 : Prototype du module Balles : Timmy
+
+03/11 : Prototype des modules Ennemis et gérer les niveaux : Timmy
+
+03/11 : Prototype du module pour controller un joueur : Mahdi
+
+06/11 : Prototype de jeu fonctionnel : All
