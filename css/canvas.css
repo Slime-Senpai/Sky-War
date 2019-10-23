@@ -1,0 +1,10 @@
+#myCanvas {
+    background-color: black;
+    left: -300px;
+    position: relative;
+}
+
+#posCanvas {
+    position: absolute;
+    left: 50%
+}
