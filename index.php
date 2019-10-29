@@ -7,7 +7,7 @@
     <script src="js/graphique/Color.js"></script>
     <script src="js/graphique/GraphicalObject.js"></script>
     <script src="js/game/Team.js"></script>
-    <script src="js/bullets/bullet.js"></script>
+    <script src="js/bullets/Bullet.js"></script>
     <script src="js/game/game.js"></script>
     <link rel="stylesheet" href="css/canvas.css">
     <meta charset="utf-8">
