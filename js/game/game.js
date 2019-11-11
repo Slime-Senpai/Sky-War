@@ -1,38 +1,77 @@
 /* Requirements:
--Color.js
--GraphicalObject.js
--Team.js
--Bullet.js
-
+FORCED TO ALL
 */
 
 window.onload = init;
-let canvas;
-let objects = [];
-let tm = new Team("Hello", new Color(0, 255, 255));
-let cooldown = 0;
+
 function init() {
     canvas = document.querySelector("#myCanvas");
-
     //context graphique
     ctx = canvas.getContext("2d");
-    objects.push(new GraphicalObject("obj1", 200, 200, 100, 50, new Color(0, 255, 255), 1, 0, ctx));
+
+    let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, new Team("Player", new Color(0, 255, 255)), 64, 64, new Color(0, 255, 255), ctx);
+    objects.push(player1);
+
+    document.addEventListener("keydown", function(e){
+        let key = e.which;
+
+        switch(key){
+            case 90:
+            case 87:
+            case 38:
+                player1.front = 1;
+            break;
+            case 83:
+            case 40:
+                player1.back = 1;
+            break;
+            case 81:
+            case 65:
+            case 37:
+                player1.left = 1;
+            break;
+            case 68:
+            case 39:
+                player1.right = 1;
+            break;
+            case 32:
+                player1.space = 1;
+        }
+    });
+    document.addEventListener("keyup", function(e){
+        let key = e.which;
+        switch(key){
+            case 90:
+            case 87:
+            case 38:
+                player1.front = 0;
+            break;
+            case 83:
+            case 40:
+                player1.back = 0;
+            break;
+            case 81:
+            case 65:
+            case 37:
+                player1.left = 0;
+            break;
+            case 68:
+            case 39:
+                player1.right = 0;
+            break;
+            case 32:
+                player1.space = 0;
+        }
+    });
+
     requestAnimationFrame(anime);
 }
 
 
 function anime() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    cooldown--;
     objects.map(o => {
         o.move();
-        if(o.name != "Bullet"){
-            if(cooldown <= 0){
-                objects.push(new Bullet(o.x, o.y, tm, o.ang, o.ctx));
-                cooldown = 60;
-            }
-            o.ang+=0.01;
-        }
         o.draw();
     });
     requestAnimationFrame(anime);
