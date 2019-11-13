@@ -3,7 +3,7 @@
 
 */
 class GraphicalObject {
-    constructor(name, x, y, width, height, color, dx, dy, ctx) {
+    constructor(name, x, y, width, height, color, dx, dy, image, ctx) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -13,6 +13,7 @@ class GraphicalObject {
         this.dx = dx;
         this.dy = dy;
         //this.ang = ang;
+        this.image = image;
         this.ctx = ctx;
     }
 
@@ -25,8 +26,9 @@ class GraphicalObject {
         this.ctx.save();
         this.ctx.translate(this.x, this.y);
         this.ctx.translate(-this.width/2, -this.height/2);
-        this.ctx.fillStyle = this.color.getColor();
-        this.ctx.fillRect(0, 0, this.width, this.height);
+        //this.ctx.fillStyle = this.color.getColor();
+        //this.ctx.fillRect(0, 0, this.width, this.height);
+        this.ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, 0, 0, this.width, this.height);
         this.ctx.restore();
     }
 

@@ -5,12 +5,13 @@
 
 */
 class Plane extends GraphicalObject {
-    constructor(name, x, y, team, width, height, color, dx, dy, bullAng, ctx) {
-        super(name, x, y, width, height, color, dx, dy, ctx);
+    constructor(name, x, y, team, width, height, color, dx, dy, bullAng, hp, image, ctx) {
+        super(name, x, y, width, height, color, dx, dy, image, ctx);
         this.team = team;
         this.bullAng = bullAng;
+        this.hp = hp;
     }
     shoot(){
-        objects.push(new Bullet("Bullet", this.x, this.y, this.team, this.bullAng, this.ctx));
+        objects.push(new Bullet("Bullet", this.x, this.y, this.team, this.bullAng, 1, this.ctx));
     }
 }

@@ -3,8 +3,8 @@
 
 */
 class Player extends Plane{
-    constructor(name, x, y, team, width, height, color, basePower, ctx) {
-        super(name, x, y, team, width, height, color, 0, 0, -Math.PI/2, ctx);
+    constructor(name, x, y, team, width, height, color, basePower, hp, image, ctx) {
+        super(name, x, y, team, width, height, color, 0, 0, -Math.PI/2, hp, image, ctx);
         this.maxSpeed = 10;
         this.power = basePower;
         this.acc = this.maxSpeed;
@@ -15,6 +15,8 @@ class Player extends Plane{
         this.space = 0;
         this.shootCooldown = 0;
     }
+
+
     funct() {
         this.changeSpeed();
         super.funct();
@@ -28,11 +30,6 @@ class Player extends Plane{
                 this.power.funct(this);
             }
         }
-    }
-
-    shoot(){
-        objects.push(new Bullet("Bullet", this.x-20, this.y-32, this.team, this.bullAng, this.ctx));
-        objects.push(new Bullet("Bullet", this.x+20, this.y-32, this.team, this.bullAng, this.ctx));
     }
 
     changeSpeed() {
@@ -59,10 +56,6 @@ class Player extends Plane{
     }
 
     worldColision() {
-
-        if(this.y < 100){
-            this.power = new Powerup("Level2", [[-40, -32, -Math.PI/2], [-20, -32, -Math.PI/2], [20, -32, -Math.PI/2], [40, -32, -Math.PI/2]]);
-        }
 
         if(this.x-32 < 0 || this.x+32 > canvas.width){
             this.x = Math.max(Math.min(this.x, canvas.width-32), 32);
