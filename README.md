@@ -2,6 +2,8 @@
 Projet pour le cours de Gestion de Projet de L3 MIAGE à Sophia Antipolis, Promotion Alain Turing 2019-2020.
 Timmy DAUMAS et Mahdi MEJRI.
 
+Le projet est hébergé sur un site web: http://skywar.slimesenpai.fr/
+
 Description du projet:
 
 Le projet est un jeu vidéo de type Shoot'Em Up nommé Sky War.
