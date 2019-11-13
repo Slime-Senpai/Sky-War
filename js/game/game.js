@@ -10,8 +10,8 @@ function init() {
     ctx = canvas.getContext("2d");
 
     let playerTeam = new Team("Player", new Color(0, 255, 255));
-    let basePowerup = new Powerup("Base", [[-20, -32, -Math.PI/2], [20, -32, -Math.PI/2]], ctx);
-    let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, playerTeam, 64, 64, new Color(0, 255, 255), basePowerup);
+    let basePowerup = new Powerup("Base", [[-20, -32, -Math.PI/2], [20, -32, -Math.PI/2]]);
+    let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, playerTeam, 64, 64, new Color(0, 255, 255), basePowerup, ctx);
     objects.push(player1);
 
     document.addEventListener("keydown", function(e){
