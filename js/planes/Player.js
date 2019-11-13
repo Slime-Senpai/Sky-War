@@ -3,9 +3,10 @@
 
 */
 class Player extends Plane{
-    constructor(name, x, y, team, width, height, color, ctx) {
+    constructor(name, x, y, team, width, height, color, basePower, ctx) {
         super(name, x, y, team, width, height, color, 0, 0, -Math.PI/2, ctx);
         this.maxSpeed = 10;
+        this.power = basePower;
         this.acc = this.maxSpeed;
         this.front = 0;
         this.back = 0;
@@ -24,7 +25,7 @@ class Player extends Plane{
             this.shootCooldown--;
             if(this.shootCooldown<=0){
                 this.shootCooldown = 5;
-                this.shoot();
+                this.power.funct(this);
             }
         }
     }
@@ -58,6 +59,11 @@ class Player extends Plane{
     }
 
     worldColision() {
+
+        if(this.y < 100){
+            this.power = new Powerup("Level2", [[-40, -32, -Math.PI/2], [-20, -32, -Math.PI/2], [20, -32, -Math.PI/2], [40, -32, -Math.PI/2]]);
+        }
+
         if(this.x-32 < 0 || this.x+32 > canvas.width){
             this.x = Math.max(Math.min(this.x, canvas.width-32), 32);
         }
