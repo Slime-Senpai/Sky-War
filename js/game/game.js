@@ -71,8 +71,7 @@ function init() {
 function anime() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     objects.map(o => {
-        o.move();
-        o.draw();
+        o.funct();
     });
     requestAnimationFrame(anime);
 }

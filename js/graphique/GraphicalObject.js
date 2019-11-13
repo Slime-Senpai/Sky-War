@@ -1,5 +1,4 @@
 /* Requirements:
--globalvariables.js
 -Color.js
 
 */
@@ -15,6 +14,11 @@ class GraphicalObject {
         this.dy = dy;
         //this.ang = ang;
         this.ctx = ctx;
+    }
+
+    funct() {
+        this.draw();
+        this.move();
     }
 
     draw() {

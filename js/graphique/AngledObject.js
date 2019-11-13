@@ -1,5 +1,6 @@
 /* Requirements:
 -Color.js
+-GraphicalObject.js
 
 */
 class AngledObject extends GraphicalObject {
