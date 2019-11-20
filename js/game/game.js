@@ -20,6 +20,11 @@ function init() {
     let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, playerTeam, 64, 64, new Color(0, 255, 255), basePowerup, 30, image, ctx);
     objects.push(player1);
     eimage.src = "assets/MovingEnemy.png";
+
+    let levelImage = new Image();
+    levelImage.src = "assets/Level1.png";
+    let level1 = new Level("Level1", new Color(200, 200, 200), -2, levelImage, ctx);
+    objects.unshift(level1);
     document.addEventListener("keydown", function(e){
         let key = e.which;
 
@@ -86,13 +91,13 @@ function anime() {
     if(spawningCooldown<=0){
         spawningCooldown=60;
         
-        objects.push(new FallingEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 2, Math.PI/2, 10, eimage, ctx));
+        objects.push(new FallingEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 4, Math.PI/2, 10, eimage, ctx));
         console.log("Spawned");
     }
 
     ctx.save();
     ctx.font = "30px Arial";
-    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fillStyle = "rgb(255, 0, 0)";
     ctx.fillText("Score: "+score, 10, 30);
     ctx.restore();
     requestAnimationFrame(anime);

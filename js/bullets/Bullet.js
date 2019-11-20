@@ -7,7 +7,7 @@
 
 class Bullet extends AngledObject{
     constructor(name, x, y, team, ang, damage, image, ctx) {
-        super(name, x, y, 20, 10, team.color, 30, ang, image, ctx);
+        super(name, x, y, 20, 5, team.color, 30, ang, image, ctx);
         this.team = team;
         this.damage = damage;
     }

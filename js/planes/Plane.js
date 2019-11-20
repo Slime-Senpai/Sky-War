@@ -5,8 +5,8 @@
 
 */
 class Plane extends GraphicalObject {
-    constructor(name, x, y, team, width, height, color, dx, dy, bullAng, hp, image, ctx) {
-        super(name, x, y, width, height, color, dx, dy, image, ctx);
+    constructor(name, x, y, team, width, height, color, dx, dy, ang, bullAng, hp, image, ctx) {
+        super(name, x, y, width, height, color, dx, dy, ang, image, ctx);
         this.team = team;
         this.bullAng = bullAng;
         this.hp = hp;

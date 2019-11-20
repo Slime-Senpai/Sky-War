@@ -4,7 +4,7 @@
 */
 class Player extends Plane{
     constructor(name, x, y, team, width, height, color, basePower, hp, image, ctx) {
-        super(name, x, y, team, width, height, color, 0, 0, -Math.PI/2, hp, image, ctx);
+        super(name, x, y, team, width, height, color, 0, 0, 0, -Math.PI/2, hp, image, ctx);
         this.maxSpeed = 10;
         this.power = basePower;
         this.acc = this.maxSpeed;
@@ -22,7 +22,7 @@ class Player extends Plane{
         super.funct();
         this.ctx.fillStyle = "red";
         this.ctx.fillRect(this.x, this.y, 2, 2);
-        this.worldColision();
+        this.worldCollision();
         if(this.space){
             this.shootCooldown--;
             if(this.shootCooldown<=0){
@@ -38,24 +38,18 @@ class Player extends Plane{
 
         if((this.front||this.back)){
             this.dy = Math.min(Math.max(-this.maxSpeed, this.dy+(this.back-this.front)*(this.acc)), this.maxSpeed);
-            cy = true;
+        }else if(this.dy != 0){
+            this.dy = 0;
         }
 
         if((this.left||this.right)){
             this.dx = Math.min(Math.max(-this.maxSpeed, this.dx+(this.right-this.left)*(this.acc)), this.maxSpeed);
-            cx = true;
-        }
-
-        if(this.dx != 0 && !cx){
+        }else if(this.dx != 0){
             this.dx = 0;
-        }
-
-        if(this.dy != 0 && !cy){
-            this.dy = 0;
         }
     }
 
-    worldColision() {
+    worldCollision() {
 
         if(this.x-32 < 0 || this.x+32 > canvas.width){
             this.x = Math.max(Math.min(this.x, canvas.width-32), 32);
