@@ -24,6 +24,7 @@ class Bullet extends AngledObject{
         let abscos = Math.abs(Math.cos(this.ang));
         let abssin = Math.abs(Math.sin(this.ang));
         objects.some(t => {
+            if(t != this && !(t instanceof Bullet) && !(t instanceof Level)){
                     let x, y = false;
 
                     // A REFAIRE
@@ -49,6 +50,7 @@ class Bullet extends AngledObject{
                         }
                         return true;
                     }
+            }
         });
 
         if(this.x-this.width > canvas.width || this.y-this.height > canvas.height || this.x+this.width < 0 || this.y-this.height < 0)
