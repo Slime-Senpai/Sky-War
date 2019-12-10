@@ -13,3 +13,17 @@ body {
     position: absolute;
     left: 50%;
 }
+
+#version {
+    position:absolute;
+    bottom: -30px;
+    left: 50%;
+}
+
+#version p {
+    position: relative;
+    left: -9ex;
+    color: blue;
+    font-size: 2em;
+    text-align: center;
+}
