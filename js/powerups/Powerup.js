@@ -1,19 +1,27 @@
 /* Requirements:
--Plane.js
+-Bullet.js
 
 */
 class Powerup{
-    constructor(name, bullets){
+    constructor(name, bullets, cooldown){
         this.name = name;
         this.bullets = bullets;
+        this.cooldown = cooldown;
+        this.shootCooldown = 0;
     }
 
-    funct(player){
-        this.shoot(player);
+    funct(plane){
+        this.shootCooldown--;
+        if(this.shootCooldown<=0){
+            this.shootCooldown = this.cooldown;
+
+            this.shoot(plane);
+        }
     }
-    shoot(player){
+    shoot(plane){
+        
         this.bullets.map(element => {
-            objects.push(new Bullet("Bullet", player.x+element[0], player.y+element[1], player.team, element[2], element[3], element[4], player.ctx));
+            objects.push(new Bullet("Bullet", plane.x+element[0], plane.y+element[1], plane.team, element[2], element[3], element[4], plane.ctx));
         });
     }
 

@@ -5,4 +5,6 @@ let canvas;
 let objects = [];
 let score = 0;
 let spawningCooldown = 0;
-let eimage = new Image();
+let images = [];
+let firstGame = 1;
+let pause = false;

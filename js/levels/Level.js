@@ -6,6 +6,8 @@ class Level extends GraphicalObject {
     constructor(name, color, dy, image, ctx) {
         super(name, 100, image.height-canvas.height, canvas.width, canvas.height, color, 0, dy, 0, image, ctx);
         this.moved = false;
+
+        this.image = image;
     }
 
     funct() {
@@ -13,6 +15,7 @@ class Level extends GraphicalObject {
         this.worldCollision();
         this.draw();
     }
+    
     changeSpeed() {
         if((objects[1].left||objects[1].right)){
             this.dx = Math.min(Math.max(-objects[1].maxSpeed/2, this.dx+(objects[1].right-objects[1].left)*(objects[1].acc)), objects[1].maxSpeed/2);
@@ -20,6 +23,7 @@ class Level extends GraphicalObject {
             this.dx = 0;
         }
     }
+
     draw() {
         this.ctx.save();
         //this.ctx.fillStyle = this.color.getColor();

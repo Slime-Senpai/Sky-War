@@ -6,25 +6,41 @@ window.onload = init;
 
 let enemyTeam = new Team("Enemy", new Color(255, 0, 0));
 
+function reset() {
+    objects = [];
+    score = 0;
+    spawningCooldown = 0;
+    firstGame = 0;
+    init();
+}
+
 function init() {
     canvas = document.querySelector("#myCanvas");
     //context graphique
     ctx = canvas.getContext("2d");
+    paused = false;
 
-    let playerTeam = new Team("Player", new Color(0, 255, 255));
-    let bimage = new Image();
-    bimage.src = "assets/BulletBig.png";
-    let basePowerup = new Powerup("Base", [[-20, -32, -Math.PI/2, 1, bimage], [20, -32, -Math.PI/2, 1, bimage]]);
-    let image = new Image();
-    image.src = "assets/PlayerBig.png";
-    let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, playerTeam, 64, 64, new Color(0, 255, 255), basePowerup, 30, image, ctx);
+    //image init
+
+    images["bullet1"] = new Image();
+    images["bullet1"].src = "assets/BulletBig.png";
+
+    images["player1"] = new Image();
+    images["player1"].src = "assets/PlayerBig.png";
+
+    images["mvEnemy"] = new Image();
+    images["mvEnemy"].src = "assets/MovingEnemy.png";
+
+    images["level1"] = new Image();
+    images["level1"].src = "assets/Level1.png";
+
+    let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, new Team("Player", new Color(0, 255, 255)), 64, 64, new Color(0, 255, 255), 
+            new Powerup("Base_Powerup", [[-20, -32, -Math.PI/2, 1, images["bullet1"]], [20, -32, -Math.PI/2, 1, images["bullet1"]]], 5), 30, images["player1"], ctx);
     objects.push(player1);
-    eimage.src = "assets/MovingEnemy.png";
 
-    let levelImage = new Image();
-    levelImage.src = "assets/Level1.png";
-    let level1 = new Level("Level1", new Color(200, 200, 200), -2, levelImage, ctx);
+    let level1 = new Level("Level1", new Color(200, 200, 200), -2, images["level1"], ctx);
     objects.unshift(level1);
+    
     document.addEventListener("keydown", function(e){
         let key = e.which;
 
@@ -49,6 +65,7 @@ function init() {
             break;
             case 32:
                 player1.space = 1;
+            break;
         }
     });
     document.addEventListener("keyup", function(e){
@@ -74,31 +91,61 @@ function init() {
             break;
             case 32:
                 player1.space = 0;
+            break;
+            case 82:
+                reset();
+            break;
+            case 80:
+                paused = !paused;
+            break;
         }
     });
-
-    requestAnimationFrame(anime);
+    if(firstGame == 1)
+        images["level1"].onload = function(){
+            requestAnimationFrame(anime);
+        };
 }
 
 
 function anime() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    objects.map(o => {
-        o.funct();
-    });
-    spawningCooldown--;
-    if(spawningCooldown<=0){
-        spawningCooldown=60;
+    if(!paused && objects[1] instanceof Player){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        objects.push(new FallingEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 4, Math.PI/2, 10, eimage, ctx));
-        console.log("Spawned");
-    }
+        objects.forEach(o => {
+            o.funct();
+        });
+        spawningCooldown--;
+        if(spawningCooldown<=0){
+            spawningCooldown=60;
+            
+            objects.push(new FallingEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 4, Math.PI/2, 10, images["mvEnemy"], ctx));
+            console.log("Spawned");
+        }
 
-    ctx.save();
-    ctx.font = "30px Arial";
-    ctx.fillStyle = "rgb(255, 0, 0)";
-    ctx.fillText("Score: "+score, 10, 30);
-    ctx.restore();
+        ctx.save();
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "rgb(255, 0, 0)";
+        ctx.fillText("Score: "+score, 10, 30);
+        ctx.restore();
+    }else if(paused){
+        ctx.save();
+        ctx.font = "60px Arial";
+        ctx.fillStyle = "rgb(200, 0, 0)";
+        ctx.textAlign = "center";
+        ctx.fillText("PAUSED", canvas.width/2, canvas.height/2);
+        ctx.restore();
+    }else{
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.font = "60px Arial";
+        ctx.fillStyle = "rgb(200, 0, 0)";
+        ctx.textAlign = "center";
+        ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2);
+        ctx.fillStyle = "rgb(30, 200, 200)";
+        ctx.fillText("Score: "+score, canvas.width/2, canvas.height/2+60);
+        ctx.font = "30px Arial";
+        ctx.fillText("Press 'R' to restart", canvas.width/2, canvas.height/2+100);
+        ctx.restore();
+    }
     requestAnimationFrame(anime);
 }

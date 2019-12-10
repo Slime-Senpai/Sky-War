@@ -39,7 +39,7 @@ class Bullet extends AngledObject{
                     if(this.y -abssin*(this.width/2)-abscos*(this.height/2) < t.y+(t.height/2) && t.y-(t.height/2) < this.y -abssin*(this.width/2)-abscos*(this.height/2)) {
                         y = true;
                     }
-                    if(x && y){
+                    if(x && y && t.team != this.team){
                         this.speed = 0;
                         this.die();
                         t.hp -= this.damage;

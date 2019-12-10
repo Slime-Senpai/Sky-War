@@ -10,7 +10,7 @@ class FallingEnemy extends Plane {
     }
 
     move() {
-        super.move();
-        this.x -= (objects[0].moved ? objects[0].dx : 0);
+        this.x += this.dx-(objects[0].moved ? objects[0].dx : 0);
+        this.y += this.dy;
     }
 }
