@@ -101,13 +101,13 @@ function init() {
         }
     });
     if(firstGame == 1)
-        images["level1"].onload = function(){
             ctx.save();
             ctx.font = "60px Arial";
             ctx.fillStyle = "rgb(200, 0, 0)";
             ctx.textAlign = "center";
             ctx.fillText("LOADING", canvas.width/2, canvas.height/2);
             ctx.restore();
+        images["level1"].onload = function(){
             requestAnimationFrame(anime);
         };
 }
