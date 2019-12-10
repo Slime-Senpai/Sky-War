@@ -16,7 +16,7 @@ body {
 
 #version {
     position:absolute;
-    bottom: -30px;
+    bottom: 60px;
     left: 50%;
 }
 
