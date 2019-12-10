@@ -21,25 +21,24 @@ function init() {
     paused = false;
 
     //image init
+    if(firstGame == 1){
+        images["bullet1"] = new Image();
+        images["bullet1"].src = "assets/BulletBig.png";
 
-    images["bullet1"] = new Image();
-    images["bullet1"].src = "assets/BulletBig.png";
+        images["player1"] = new Image();
+        images["player1"].src = "assets/PlayerBig.png";
 
-    images["player1"] = new Image();
-    images["player1"].src = "assets/PlayerBig.png";
+        images["mvEnemy"] = new Image();
+        images["mvEnemy"].src = "assets/MovingEnemy.png";
 
-    images["mvEnemy"] = new Image();
-    images["mvEnemy"].src = "assets/MovingEnemy.png";
-
-    images["level1"] = new Image();
-    images["level1"].src = "assets/Level1.png";
-
+        images["level1"] = new Image();
+        images["level1"].src = "assets/Level1.png";
+    }
     let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, new Team("Player", new Color(0, 255, 255)), 64, 64, new Color(0, 255, 255), 
             new Powerup("Base_Powerup", [[-20, -32, -Math.PI/2, 1, images["bullet1"]], [20, -32, -Math.PI/2, 1, images["bullet1"]]], 5), 30, images["player1"], ctx);
     objects.push(player1);
 
-    let level1 = new Level("Level1", new Color(200, 200, 200), -2, images["level1"], ctx);
-    objects.unshift(level1);
+    
     
     document.addEventListener("keydown", function(e){
         let key = e.which;
@@ -68,6 +67,7 @@ function init() {
             break;
         }
     });
+
     document.addEventListener("keyup", function(e){
         let key = e.which;
         switch(key){
@@ -100,16 +100,22 @@ function init() {
             break;
         }
     });
-    if(firstGame == 1)
-            ctx.save();
-            ctx.font = "60px Arial";
-            ctx.fillStyle = "rgb(200, 0, 0)";
-            ctx.textAlign = "center";
-            ctx.fillText("LOADING", canvas.width/2, canvas.height/2);
-            ctx.restore();
-        images["level1"].onload = function(){
+
+    ctx.save();
+    ctx.font = "60px Arial";
+    ctx.fillStyle = "rgb(200, 0, 0)";
+    ctx.textAlign = "center";
+    ctx.fillText("LOADING", canvas.width/2, canvas.height/2);
+    ctx.restore();
+
+    if(firstGame == 1){
+        images["level1"].onload = function() {
+            let level1 = new Level("Level1", new Color(200, 200, 200), -2, images["level1"], ctx);
+            objects.unshift(level1);
             requestAnimationFrame(anime);
+            
         };
+    }
 }
 
 
