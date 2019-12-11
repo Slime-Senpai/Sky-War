@@ -35,7 +35,7 @@ function init() {
         images["level1"].src = "assets/Level1.png";
     }
     let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, new Team("Player", new Color(0, 255, 255)), 64, 64, new Color(0, 255, 255), 
-            new Powerup("Base_Powerup", [[-20, -32, -Math.PI/2, 1, images["bullet1"]], [20, -32, -Math.PI/2, 1, images["bullet1"]]], 5), 30, images["player1"], ctx);
+            new Powerup("Powerup_Basic", [[-20, -32, 30, -Math.PI/2, 2, images["bullet1"]], [20, -32, 30, -Math.PI/2, 2, images["bullet1"]]], 5), 30, images["player1"], ctx);
     objects.push(player1);
 
     
@@ -115,6 +115,9 @@ function init() {
             requestAnimationFrame(anime);
             
         };
+    }else{
+        let level1 = new Level("Level1", new Color(200, 200, 200), -2, images["level1"], ctx);
+        objects.unshift(level1);
     }
 }
 
@@ -129,8 +132,8 @@ function anime() {
         spawningCooldown--;
         if(spawningCooldown<=0){
             spawningCooldown=60;
-            
-            objects.push(new FallingEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 4, Math.PI/2, 10, images["mvEnemy"], ctx));
+            let power = new Powerup("Powerup_Enemy_Basic", [[0, 32, 10, Math.PI/2, 25, images["bullet1"]]], 40 + Math.random()*80);
+            objects.push(new BasicEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 4, power, 10, images["mvEnemy"], ctx));
             console.log("Spawned");
         }
 

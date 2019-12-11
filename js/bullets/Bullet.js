@@ -6,8 +6,8 @@
 */
 
 class Bullet extends AngledObject{
-    constructor(name, x, y, team, ang, damage, image, ctx) {
-        super(name, x, y, 20, 5, team.color, 30, ang, image, ctx);
+    constructor(name, x, y, team, speed, ang, damage, image, ctx) {
+        super(name, x, y, 20, 5, team.color, speed, ang, image, ctx);
         this.team = team;
         this.damage = damage;
     }
@@ -18,6 +18,7 @@ class Bullet extends AngledObject{
     }
     move() {
         super.move();
+        this.x -= (objects[0].moved ? objects[0].dx : 0);
     }
 
     collide() {
@@ -46,7 +47,8 @@ class Bullet extends AngledObject{
                         t.hp -= this.damage;
                         if(t.hp<=0){
                             t.die();
-                            score++;
+                            if(!(t instanceof Player))
+                                score++;
                         }
                         return true;
                     }

@@ -11,6 +11,7 @@ class Plane extends GraphicalObject {
         this.power = basePower;
         this.hp = hp;
     }
+
     shoot(){
         this.power.funct(this);
     }

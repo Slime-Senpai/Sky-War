@@ -15,8 +15,8 @@ body {
 }
 
 #version {
-    position:absolute;
-    bottom: 60px;
+    position: absolute;
+    top: 790px;
     left: 50%;
 }
 
