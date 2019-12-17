@@ -5,8 +5,8 @@
 
 */
 class BasicEnemy extends Plane {
-    constructor(name, x, y, team, width, height, color, dy, basePower, hp, image, ctx) {
-        super(name, x, y, team, width, height, color, 0, dy, Math.PI, basePower, hp, image, ctx);
+    constructor(name, x, y, team, width, height, color, dx, dy, basePower, hp, image, ctx) {
+        super(name, x, y, team, width, height, color, dx, dy, Math.PI, basePower, hp, image, ctx);
     }
 
     funct(){

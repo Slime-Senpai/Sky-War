@@ -33,73 +33,71 @@ function init() {
 
         images["level1"] = new Image();
         images["level1"].src = "assets/Level1.png";
+        document.addEventListener("keydown", function(e){
+            let key = e.which;
+    
+            switch(key){
+                case 90:
+                case 87:
+                case 38:
+                    objects[1].front = 1;
+                break;
+                case 83:
+                case 40:
+                    objects[1].back = 1;
+                break;
+                case 81:
+                case 65:
+                case 37:
+                    objects[1].left = 1;
+                break;
+                case 68:
+                case 39:
+                    objects[1].right = 1;
+                break;
+                case 32:
+                    objects[1].space = 1;
+                break;
+            }
+        });
+    
+        document.addEventListener("keyup", function(e){
+            let key = e.which;
+            switch(key){
+                case 90:
+                case 87:
+                case 38:
+                    objects[1].front = 0;
+                break;
+                case 83:
+                case 40:
+                    objects[1].back = 0;
+                break;
+                case 81:
+                case 65:
+                case 37:
+                    objects[1].left = 0;
+                break;
+                case 68:
+                case 39:
+                    objects[1].right = 0;
+                break;
+                case 32:
+                    objects[1].space = 0;
+                break;
+                case 82:
+                    reset();
+                break;
+                case 80:
+                    paused = !paused;
+                    console.log(paused);
+                break;
+            }
+        });
     }
     let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, new Team("Player", new Color(0, 255, 255)), 64, 64, new Color(0, 255, 255), 
             new Powerup("Powerup_Basic", [[-20, -32, 30, -Math.PI/2, 2, images["bullet1"]], [20, -32, 30, -Math.PI/2, 2, images["bullet1"]]], 5), 30, images["player1"], ctx);
     objects.push(player1);
-
-    
-    
-    document.addEventListener("keydown", function(e){
-        let key = e.which;
-
-        switch(key){
-            case 90:
-            case 87:
-            case 38:
-                player1.front = 1;
-            break;
-            case 83:
-            case 40:
-                player1.back = 1;
-            break;
-            case 81:
-            case 65:
-            case 37:
-                player1.left = 1;
-            break;
-            case 68:
-            case 39:
-                player1.right = 1;
-            break;
-            case 32:
-                player1.space = 1;
-            break;
-        }
-    });
-
-    document.addEventListener("keyup", function(e){
-        let key = e.which;
-        switch(key){
-            case 90:
-            case 87:
-            case 38:
-                player1.front = 0;
-            break;
-            case 83:
-            case 40:
-                player1.back = 0;
-            break;
-            case 81:
-            case 65:
-            case 37:
-                player1.left = 0;
-            break;
-            case 68:
-            case 39:
-                player1.right = 0;
-            break;
-            case 32:
-                player1.space = 0;
-            break;
-            case 82:
-                reset();
-            break;
-            case 80:
-                paused = !paused;
-            break;
-        }
-    });
 
     ctx.save();
     ctx.font = "60px Arial";
@@ -108,15 +106,16 @@ function init() {
     ctx.fillText("LOADING", canvas.width/2, canvas.height/2);
     ctx.restore();
 
+    let spawnList = [];
     if(firstGame == 1){
         images["level1"].onload = function() {
-            let level1 = new Level("Level1", new Color(200, 200, 200), -2, images["level1"], ctx);
+            let level1 = new Level("Level1", new Color(200, 200, 200), -2, images["level1"], spawnList, ctx);
             objects.unshift(level1);
             requestAnimationFrame(anime);
             
         };
     }else{
-        let level1 = new Level("Level1", new Color(200, 200, 200), -2, images["level1"], ctx);
+        let level1 = new Level("Level1", new Color(200, 200, 200), -2, images["level1"], spawnList, ctx);
         objects.unshift(level1);
     }
 }
@@ -133,7 +132,7 @@ function anime() {
         if(spawningCooldown<=0){
             spawningCooldown=60;
             let power = new Powerup("Powerup_Enemy_Basic", [[0, 32, 10, Math.PI/2, 25, images["bullet1"]]], 40 + Math.random()*80);
-            objects.push(new BasicEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 4, power, 10, images["mvEnemy"], ctx));
+            objects.push(new BasicEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 0, 4, power, 10, images["mvEnemy"], ctx));
             console.log("Spawned");
         }
 

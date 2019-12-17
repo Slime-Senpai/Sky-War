@@ -3,10 +3,10 @@
 
 */
 class Level extends GraphicalObject {
-    constructor(name, color, dy, image, ctx) {
+    constructor(name, color, dy, image, spawnList, ctx) {
         super(name, 100, image.height-canvas.height, canvas.width, canvas.height, color, 0, dy, 0, image, ctx);
         this.moved = false;
-
+        this.spawnList = spawnList;
         this.image = image;
     }
 
@@ -14,6 +14,21 @@ class Level extends GraphicalObject {
         this.changeSpeed();
         this.worldCollision();
         this.draw();
+        if(this.spawnList.length > 0){
+            this.spawner();
+        }
+    }
+
+    spawner() {
+        if(this.spawnList[0] <= this.y){
+            for(let i=0; i<this.spawnList[1].length; i++){
+                switch(this.spawnList[1][i]["name"]){
+                    case "BasicEnemy":
+                        objects.push(new BasicEnemy(this.spawnList[1][i]["name"], this.spawnList[1][i]["x"], this.spawnList[1][i]["y"], enemyTeam, 64, 64, enemyTeam.color, this.spawnList[1][i]["dx"], this.spawnList[1][i]["dy"], this.spawnList[1][i]["power"], this.spawnList[1][i]["hp"], images["mvEnemy"], ctx));
+                    break;
+                }
+            }
+        }
     }
     
     changeSpeed() {
