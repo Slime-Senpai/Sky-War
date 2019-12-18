@@ -163,3 +163,13 @@ function anime() {
     }
     requestAnimationFrame(anime);
 }
+
+function ask(str) {
+    xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function() {
+        if(xmlhttp.readyState === 4)
+            document.location.reload(true);
+    }
+    xmlhttp.open("GET","score.php?score="+score+"&pseudo="+str,true);
+    xmlhttp.send();
+ }

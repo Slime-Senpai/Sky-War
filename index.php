@@ -1,4 +1,29 @@
 <!DOCTYPE html>
+<?php
+$file = file_get_contents("score.txt");
+$scorearray = explode("\n", $file);
+$scorearray2 = array();
+foreach($scorearray as $value){
+    array_push($scorearray2, explode(";", $value));
+}
+$title = array("Score", "Pseudo");
+$tab = genereTable($title, $scorearray2);
+function genereTable($title, $body){
+    $tableau = "<table><thead><tr>";
+	foreach($title as $value){
+		$tableau .= "<th>".$value."</th>";
+	}
+	$tableau .= "</tr></thead><tbody>";
+	foreach($body as $value){
+		$tableau .= "<tr>";
+		foreach($value as $key => $value2){
+				$tableau .= "<td>".$value2."</td>";
+		}
+		$tableau .= "<tr>";
+	}
+	return $tableau;
+}
+?>
 <html>
 <head>
     <script src="js/game/globalvariables.js"></script>
@@ -22,6 +47,9 @@
             <canvas id="myCanvas" width="600" height="800"></canvas>
         </div>
     </section>
-    <div id="version"><p>Version 2.2 in-dev</p></div>
+    <input type="text" id="input1" value="Pseudo"></input>
+	<input type="submit" onclick="ask(document.getElementById('input1').value)"></input>
+	<?php echo $tab;?>
+    <div id="version"><p>Version 3.0 in-dev</p></div>
 </body>
 </html> 
