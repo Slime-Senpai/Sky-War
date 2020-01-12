@@ -27,3 +27,9 @@ body {
     font-size: 2em;
     text-align: center;
 }
+
+#thanks {
+    position: absolute;
+    bottom: 10px;
+    left: 100px;
+}

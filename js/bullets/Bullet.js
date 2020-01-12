@@ -55,7 +55,7 @@ class Bullet extends AngledObject{
             }
         });
 
-        if(this.x-this.width > canvas.width || this.y-this.height > canvas.height || this.x+this.width < 0 || this.y-this.height < 0)
+        if(this.x-this.width > canvas.width || this.y-this.height > canvas.height || this.x+this.width < 0 || this.y+this.height < 0)
             this.die();
     }
 }
