@@ -23,10 +23,10 @@ function init() {
     //image init
     if(firstGame == 1){
         images["bullet1"] = new Image();
-        images["bullet1"].src = "assets/BulletBig.png";
+        images["bullet1"].src = "assets/Bullet.png";
 
         images["player1"] = new Image();
-        images["player1"].src = "assets/PlayerBig.png";
+        images["player1"].src = "assets/Player.png";
 
         images["mvEnemy"] = new Image();
         images["mvEnemy"].src = "assets/MovingEnemy.png";
