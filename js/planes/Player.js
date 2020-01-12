@@ -3,8 +3,13 @@
 
 */
 class Player extends Plane{
-    constructor(name, x, y, team, width, height, color, basePower, hp, image, ctx) {
-        super(name, x, y, team, width, height, color, 0, 0, 0, basePower, hp, image, ctx);
+    constructor(name, ctx) {
+        
+        let tcolor = new Color(0, 255, 255);
+        let tpowerup = new Powerup("Powerup_Player_Basic", [[-20, -32, 30, -Math.PI/2, 2, images["bullet1"]], [20, -32, 30, -Math.PI/2, 2, images["bullet1"]]], 5);
+        let tteam = new Team("Player", tcolor);
+
+        super(name, (canvas.width-64)/2, canvas.height-84, tteam, 64, 64, tcolor, 0, 0, 0, tpowerup, 30, images["player1"], ctx);
         this.maxSpeed = 10;
         this.acc = this.maxSpeed;
         this.front = 0;
@@ -13,7 +18,6 @@ class Player extends Plane{
         this.right = 0;
         this.space = 0;
     }
-
 
     funct() {
         this.changeSpeed();

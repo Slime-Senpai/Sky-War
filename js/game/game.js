@@ -90,13 +90,11 @@ function init() {
                 break;
                 case 80:
                     paused = !paused;
-                    console.log(paused);
                 break;
             }
         });
     }
-    let player1 = new Player("Player", (canvas.width-64)/2, canvas.height-84, new Team("Player", new Color(0, 255, 255)), 64, 64, new Color(0, 255, 255), 
-            new Powerup("Powerup_Basic", [[-20, -32, 30, -Math.PI/2, 2, images["bullet1"]], [20, -32, 30, -Math.PI/2, 2, images["bullet1"]]], 5), 30, images["player1"], ctx);
+    let player1 = new Player("Player1", ctx);
     objects.push(player1);
 
     ctx.save();
@@ -131,9 +129,7 @@ function anime() {
         spawningCooldown--;
         if(spawningCooldown<=0){
             spawningCooldown=60;
-            let power = new Powerup("Powerup_Enemy_Basic", [[0, 32, 10, Math.PI/2, 25, images["bullet1"]]], 40 + Math.random()*80);
-            objects.push(new BasicEnemy("Enemy", Math.random()*canvas.width, -100, enemyTeam, 64, 64, enemyTeam.color, 0, 4, power, 10, images["mvEnemy"], ctx));
-            console.log("Spawned");
+            objects.push(new BasicEnemy("BasicEnemy", Math.random()*canvas.width, -100, ctx));
         }
 
         ctx.save();

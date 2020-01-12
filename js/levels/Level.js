@@ -7,6 +7,7 @@ class Level extends GraphicalObject {
         super(name, 100, image.height-canvas.height, canvas.width, canvas.height, color, 0, dy, 0, image, ctx);
         this.moved = false;
         this.spawnList = spawnList;
+        this.spawning =  0;
         this.image = image;
     }
 
@@ -24,10 +25,11 @@ class Level extends GraphicalObject {
             for(let i=0; i<this.spawnList[1].length; i++){
                 switch(this.spawnList[1][i]["name"]){
                     case "BasicEnemy":
-                        objects.push(new BasicEnemy(this.spawnList[1][i]["name"], this.spawnList[1][i]["x"], this.spawnList[1][i]["y"], enemyTeam, 64, 64, enemyTeam.color, this.spawnList[1][i]["dx"], this.spawnList[1][i]["dy"], this.spawnList[1][i]["power"], this.spawnList[1][i]["hp"], images["mvEnemy"], ctx));
+                        objects.push(new BasicEnemy("BasicEnemy", this.spawnList[1][i]["x"], this.spawnList[1][i]["y"], ctx));
                     break;
                 }
             }
+            this.spawning+= 2;
         }
     }
     

@@ -50,6 +50,6 @@ function genereTable($title, $body){
     <input type="text" id="input1" value="Pseudo"></input>
 	<input type="submit" onclick="ask(document.getElementById('input1').value)"></input>
 	<?php echo $tab;?>
-    <div id="version"><p>Version 3.0 in-dev</p></div>
+    <div id="version"><p>Version 3.5 in-dev</p></div>
 </body>
 </html> 
