@@ -10,6 +10,7 @@ class Bullet extends AngledObject{
         super(name, x, y, 20, 5, team.color, speed, ang, image, ctx);
         this.team = team;
         this.damage = damage;
+        
     }
 
     funct() {
@@ -47,8 +48,13 @@ class Bullet extends AngledObject{
                         t.hp -= this.damage;
                         if(t.hp<=0){
                             t.die();
-                            if(!(t instanceof Player))
-                                score++;
+                            if(t instanceof BasicEnemy){
+                                score += 1;
+                            }else if(t instanceof ZigzagEnemy){
+                                score += 2;
+                            }else if(t instanceof StayingEnemy){
+                                score += 5;
+                            }
                         }
                         return true;
                     }

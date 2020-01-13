@@ -35,6 +35,8 @@ function genereTable($title, $body){
     <script src="js/powerups/Powerup.js"></script>
     <script src="js/planes/Plane.js"></script>
     <script src="js/planes/BasicEnemy.js"></script>
+    <script src="js/planes/ZigzagEnemy.js"></script>
+    <script src="js/planes/StayingEnemy.js"></script>
     <script src="js/planes/Player.js"></script>
     <script src="js/levels/Level.js"></script>
     <script src="js/game/game.js"></script>
@@ -50,10 +52,6 @@ function genereTable($title, $body){
     <input type="text" id="input1" value="Pseudo"></input>
 	<input type="submit" onclick="ask(document.getElementById('input1').value)"></input>
 	<?php echo $tab;?>
-    <div id="version"><p>Version 3.6 in-dev</p></div>
-    <div id="thanks">
-        <p>Sound coming from</p>
-        <p>http://soundbible.com/1804-M4A1-Single.html</p>
-    </div>
+    <div id="version"><p>Version 4.0 in-dev</p></div>
 </body>
 </html> 

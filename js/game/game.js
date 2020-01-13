@@ -33,6 +33,7 @@ function init() {
 
         images["level1"] = new Image();
         images["level1"].src = "assets/Level1.png";
+
         document.addEventListener("keydown", function(e){
             let key = e.which;
     
@@ -129,7 +130,23 @@ function anime() {
         spawningCooldown--;
         if(spawningCooldown<=0){
             spawningCooldown=60;
-            objects.push(new BasicEnemy("BasicEnemy", Math.random()*canvas.width, -100, ctx));
+            let randomEnemy = Math.floor(Math.random()*3);
+            let spawningEnemy;
+            switch(randomEnemy){
+                case 0:
+                    spawningEnemy = new BasicEnemy("BasicEnemy", 32+Math.random()*canvas.width-64, -100, ctx);
+                break;
+                case 1:
+                    spawningEnemy = new ZigzagEnemy("ZigzagEnemy", 32+Math.random()*canvas.width-64, -100, ctx);
+                break;
+                case 2:
+                    spawningEnemy = new StayingEnemy("StayingEnemy", 32+Math.random()*canvas.width-64, -100, ctx);
+                break;
+                default:
+                    spawningEnemy = new BasicEnemy("BasicEnemy", 32+Math.random()*canvas.width-64, -100, ctx)
+                break;
+            }
+            objects.push(spawningEnemy);
         }
 
         ctx.save();

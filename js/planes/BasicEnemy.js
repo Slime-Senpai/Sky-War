@@ -18,7 +18,7 @@ class BasicEnemy extends Plane {
     move() {
         super.move();
         this.x -= (objects[0].moved ? objects[0].dx : 0);
-        if(this.x<-32){
+        if(this.y>canvas.height+32){
             this.die();
         }
     }
